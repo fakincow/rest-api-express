@@ -36,9 +36,15 @@ new Vue(
                this.contacts = response
                 this.form.name = this.form.value = ''
             },
-            markContact(id){
-              const contact = this.contacts.find(c => c.id === id);
-              contact.marked = true;
+            async markContact(id){
+             // const contact = this.contacts.find(c => c.id === id);
+              //contact.marked = true;
+            const contact = this.contacts.find(c => c.id === id)
+                await request(`api/contacts/${id}`,'PUT',{
+                    ...contact,
+                    marked:true
+                })
+                contact.marked = true;
             },
             async removeContact(id){
                 const response = await request(`api/contacts/${id}`,'DELETE')
