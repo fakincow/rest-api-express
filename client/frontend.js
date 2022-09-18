@@ -30,9 +30,10 @@ new Vue(
           }
         },
         methods: {
-            createContact(){
+            async createContact(){
                 const {...contact } = this.form;
-                this.contacts.push({...contact, id: Date.now(), marked: false })
+                const response = await request('api/contacts/','POST',contact )
+               // this.contacts.push({...contact, id: Date.now(), marked: false })
                 this.form.name = this.form.value = ''
             },
             markContact(id){
