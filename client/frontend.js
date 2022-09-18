@@ -10,7 +10,7 @@ new Vue(
                     value: ''
                 },
                 contacts: [
-                    {id:1, name: 'Roman', value: '0548390923', marked: false}
+
                 ]
             }
         },
@@ -32,6 +32,31 @@ new Vue(
             removeContact(id){
                 this.contacts = this.contacts.filter((con) => con.id !== id)
             },
+        },
+        async mounted(){
+            console.log('mounted')
+            const data = await request('/api/contacts');
+            console.log(data)
+            this.contacts = data;
         }
     }
 )
+
+async function request(url, method = 'GET', data =null){
+    try{
+       const headers = {}
+        let body
+        if(data){
+            headers['Content-Type'] = 'application/json'
+            body = JSON.stringify(data);
+        }
+        const response = await fetch(url,{
+            method,
+            headers,
+            body
+        })
+        return await response.json();
+    }catch (e){
+        console.warn('Error', e.message);
+    }
+}

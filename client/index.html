@@ -31,7 +31,7 @@
     <div v-if="contacts.length">
         <div class="card mb-3" v-for="contact in contacts">
             <div class="card-body">
-                <h5 class="card-title" :style="{color: contact.marked ? 'red' : green}">{{contact.name}}</h5>
+                <h5 class="card-title" :style="{color: contact.marked ? 'red' : 'green'}">{{contact.name}}</h5>
                 <p class="card-text">{{contact.value}}</p>
                 <button class="btn btn-primary" @click="markContact(contact.id)" :disabled="contact.marked">Select</button>
                 <button class="btn btn-danger"  @click="removeContact(contact.id)">Delete</button>
