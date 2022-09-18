@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
     <title>REST API</title>
     <style>
-        [v-cloak]{
+        [v-cloak] {
             display: none;
         }
     </style>
@@ -27,14 +27,17 @@
         <button class="btn btn-primary" type="submit" :disabled="!canCreate">Create</button>
     </form>
 
-
-    <div v-if="contacts.length">
+    <div v-if="loading">
+        <loader/>
+    </div>
+    <div v-else-if="contacts.length">
         <div class="card mb-3" v-for="contact in contacts">
             <div class="card-body">
                 <h5 class="card-title" :style="{color: contact.marked ? 'red' : 'green'}">{{contact.name}}</h5>
                 <p class="card-text">{{contact.value}}</p>
-                <button class="btn btn-primary" @click="markContact(contact.id)" :disabled="contact.marked">Select</button>
-                <button class="btn btn-danger"  @click="removeContact(contact.id)">Delete</button>
+                <button class="btn btn-primary" @click="markContact(contact.id)" :disabled="contact.marked">Select
+                </button>
+                <button class="btn btn-danger" @click="removeContact(contact.id)">Delete</button>
             </div>
         </div>
     </div>
